@@ -4,7 +4,6 @@ import json
 from telegram import Update, KeyboardButton, ReplyKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 from sheets_helper import find_patient, find_patient_by_phone
-from llm_fallback import ask_anythingllm
 from openai_helper import generate_response
 
 # 🔐 Token sécurisé via variables d’environnement
@@ -30,7 +29,7 @@ async def handle_contact(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"📌 Remarques : {patient['remarques']}"
         )
     else:
-        response = "Je n’ai pas trouvé ce numéro dans ma base de patients."
+        response = "Veuillez d’abord m’indiquer votre prénom ou partager votre numéro de téléphone 📱."
 
     await update.message.reply_text(response)
 
